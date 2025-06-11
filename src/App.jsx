@@ -1,18 +1,33 @@
-import { useState } from "react";
+import { use, useState } from "react";
 
 import "./App.css";
 
 function App() {
     const [count, setCount] = useState(0);
+    const [open, setOpen] = useState(true);
+
+    function toggleOpenStepContainer() {
+        if (open) {
+            setOpen(false);
+        } else {
+            setOpen(true);
+        }
+    }
 
     return (
         <>
-            <button className="close-btn">✖</button>
-            <div className="step-container">
-                <StepNumbers />
-                <StepWriting />
-                <NavigationBtns />
-            </div>
+            <button className="close-btn" onClick={toggleOpenStepContainer}>
+                ✖
+            </button>
+            {open ? (
+                <div className="step-container">
+                    <StepNumbers />
+                    <StepWriting />
+                    <NavigationBtns />
+                </div>
+            ) : (
+                ""
+            )}
         </>
     );
 }
@@ -29,8 +44,8 @@ function StepNumbers() {
 
 function StepWriting() {
     return (
-        <div className="step-p">
-            <p>Learn React</p>
+        <div className="step-h2">
+            <h2>Learn React</h2>
         </div>
     );
 }

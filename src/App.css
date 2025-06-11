@@ -28,4 +28,29 @@
     justify-content: space-evenly;
 }
 .step-btns {
+    /* padding: 0.5rem; */
+    width: 40px;
+    height: 40px;
+    background-color: rgb(204, 204, 204);
+    color: black;
+    border: none;
+    border-radius: 50%;
+}
+.navigation-btns {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.4rem;
+}
+.prev-btn,
+.next-btn {
+    padding: 0.8rem;
+    font-size: 1rem;
+    background-color: rgb(98, 0, 255);
+    border: none;
+    border-radius: 1.4rem;
+    cursor: pointer;
+}
+.current-step {
+    color: #fff;
+    background-color: rgb(98, 0, 255);
 }
