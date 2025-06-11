@@ -1,6 +1,31 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  /* padding: 2rem; */
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.close-btn {
+    margin-bottom: 1rem;
+    background-color: #fff;
+    color: black;
+    border: none;
+    border-radius: 0.4rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.step-container {
+    width: 500px;
+    margin: 0 auto;
+    background-color: rgb(236, 236, 236);
+    border-radius: 0.5rem;
+    color: black;
+    padding: 1rem;
+}
+.step-numbers {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+.step-btns {
 }
