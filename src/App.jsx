@@ -3,8 +3,13 @@ import { use, useState } from "react";
 import "./App.css";
 
 function App() {
-    const [count, setCount] = useState(0);
     const [open, setOpen] = useState(true);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [stepArray, setStepArray] = useState([
+        { id: 1, stepDescription: "Step 1: Learn React " },
+        { id: 2, stepDescription: "Step 2: Apply for jobs 💼" },
+        { id: 3, stepDescription: "Step 3: Invest your new income 🤑" },
+    ]);
 
     function toggleOpenStepContainer() {
         if (open) {
@@ -14,6 +19,16 @@ function App() {
         }
     }
 
+    function onClickNextBtn() {
+        if (currentStep >= stepArray.length - 1) return;
+        setCurrentStep(currentStep + 1);
+    }
+
+    function onClickPrevBtn() {
+        if (currentStep === 0) return;
+        setCurrentStep(currentStep - 1);
+    }
+
     return (
         <>
             <button className="close-btn" onClick={toggleOpenStepContainer}>
@@ -21,9 +36,19 @@ function App() {
             </button>
             {open ? (
                 <div className="step-container">
-                    <StepNumbers />
-                    <StepWriting />
-                    <NavigationBtns />
+                    <StepNumbers
+                        stepArray={stepArray}
+                        currentStep={currentStep}
+                    />
+                    <StepWriting
+                        stepArray={stepArray}
+                        currentStep={currentStep}
+                    />
+                    <NavigationBtns
+                        stepArray={stepArray}
+                        onClickNextBtn={onClickNextBtn}
+                        onClickPrevBtn={onClickPrevBtn}
+                    />
                 </div>
             ) : (
                 ""
@@ -32,29 +57,42 @@ function App() {
     );
 }
 
-function StepNumbers() {
+function StepNumbers({ stepArray, currentStep }) {
     return (
         <div className="step-numbers">
-            <button className="step-btns">1</button>
-            <button className="step-btns">2</button>
-            <button className="step-btns">3</button>
+            {stepArray.map((step, index) => {
+                return (
+                    <button
+                        key={step.id}
+                        className={`step-btns ${
+                            currentStep >= index ? "current-step" : ""
+                        }`}
+                    >
+                        {step.id}
+                    </button>
+                );
+            })}
         </div>
     );
 }
 
-function StepWriting() {
+function StepWriting({ stepArray, currentStep }) {
     return (
         <div className="step-h2">
-            <h2>Learn React</h2>
+            <h2>{stepArray[currentStep].stepDescription}</h2>
         </div>
     );
 }
 
-function NavigationBtns() {
+function NavigationBtns({ stepArray, onClickNextBtn, onClickPrevBtn }) {
     return (
         <div className="navigation-btns">
-            <button className="prev-btn">Previous</button>
-            <button className="next-btn">Next</button>
+            <button className="prev-btn" onClick={onClickPrevBtn}>
+                Previous
+            </button>
+            <button className="next-btn" onClick={onClickNextBtn}>
+                Next
+            </button>
         </div>
     );
 }
